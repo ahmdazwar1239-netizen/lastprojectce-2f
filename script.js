@@ -15,7 +15,7 @@ const firebaseConfig = {
     messagingSenderId: "143404631421",
     appId: "1:143404631421:web:1d6f856ed09377a15b7814",
     measurementId: "G-RQNWLTC901",
-    databaseURL: "https://englishlastproject-ce2f-default-rtdb.firebaseio.com"
+    databaseURL: "https://englishlastproject-ce2f-default-rtdb.asia-southeast1.firebaseio.com"
 };
 
 const fbApp = initializeApp(firebaseConfig);
