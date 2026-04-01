@@ -7,93 +7,90 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
-        * { box-sizing:border-box; }
-        body { background-color:#0f172a; min-height:100vh; color:white; -webkit-tap-highlight-color:transparent; }
-        ::-webkit-scrollbar { width:4px; }
-        ::-webkit-scrollbar-thumb { background:#1e293b; border-radius:10px; }
+        *{box-sizing:border-box;}
+        body{background-color:#0f172a;min-height:100vh;color:white;-webkit-tap-highlight-color:transparent;}
+        ::-webkit-scrollbar{width:4px;}
+        ::-webkit-scrollbar-thumb{background:#1e293b;border-radius:10px;}
 
         /* LOGIN BG */
-        #login-screen { position:relative; overflow:hidden; min-height:100dvh; }
-        .code-rain { position:absolute; inset:0; pointer-events:none; z-index:0; }
-        .login-card { position:relative; z-index:1; }
-        .float-symbol { position:absolute; font-family:'Courier New',monospace; color:rgba(59,130,246,.18); font-size:.85rem; font-weight:bold; animation:floatUp linear infinite; user-select:none; }
-        @keyframes floatUp { 0%{transform:translateY(110vh) rotate(0deg);opacity:0} 10%{opacity:1} 90%{opacity:.7} 100%{transform:translateY(-10vh) rotate(20deg);opacity:0} }
-        .orb { position:absolute; border-radius:50%; filter:blur(80px); animation:orbPulse ease-in-out infinite alternate; }
-        @keyframes orbPulse { from{opacity:.25;transform:scale(1)} to{opacity:.5;transform:scale(1.15)} }
-        .grid-overlay { position:absolute; inset:0; background-image:linear-gradient(rgba(59,130,246,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,.04) 1px,transparent 1px); background-size:48px 48px; }
+        #login-screen{position:relative;overflow:hidden;min-height:100dvh;}
+        .code-rain{position:absolute;inset:0;pointer-events:none;z-index:0;}
+        .login-card{position:relative;z-index:1;}
+        .float-symbol{position:absolute;font-family:'Courier New',monospace;color:rgba(59,130,246,.18);font-size:.85rem;font-weight:bold;animation:floatUp linear infinite;user-select:none;}
+        @keyframes floatUp{0%{transform:translateY(110vh) rotate(0deg);opacity:0}10%{opacity:1}90%{opacity:.7}100%{transform:translateY(-10vh) rotate(20deg);opacity:0}}
+        .orb{position:absolute;border-radius:50%;filter:blur(80px);animation:orbPulse ease-in-out infinite alternate;}
+        @keyframes orbPulse{from{opacity:.25;transform:scale(1)}to{opacity:.5;transform:scale(1.15)}}
+        .grid-overlay{position:absolute;inset:0;background-image:linear-gradient(rgba(59,130,246,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,.04) 1px,transparent 1px);background-size:48px 48px;}
 
         /* BADGES */
-        .badge-ce2f { display:inline-flex;align-items:center;gap:3px;background:linear-gradient(135deg,#1e293b,#0f172a);border:1px solid rgba(148,163,184,.3);color:#94a3b8;font-size:7px;font-weight:800;padding:2px 6px;border-radius:5px;letter-spacing:.05em; }
-        .badge-webdev { display:inline-flex;align-items:center;gap:3px;background:linear-gradient(135deg,#581c87,#7e22ce,#581c87);background-size:200% 200%;border:1px solid #a855f7;box-shadow:0 0 12px #a855f780;color:#e9d5ff;font-size:7px;font-weight:900;padding:2px 6px;border-radius:5px;animation:gradShift 2s ease infinite,webdevGlow 1.5s ease-in-out infinite alternate;letter-spacing:.05em; }
-        @keyframes gradShift { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
-        @keyframes webdevGlow { from{box-shadow:0 0 8px #a855f780} to{box-shadow:0 0 20px #a855f7cc,0 0 40px #7e22ce44} }
-        .badge-lecturer { display:inline-flex;align-items:center;gap:3px;background:linear-gradient(135deg,#7f1d1d,#dc2626);border:1px solid #f87171;box-shadow:0 0 14px #dc262660;color:#fecaca;font-size:7px;font-weight:900;padding:2px 6px;border-radius:5px;letter-spacing:.05em; }
-        .badge-gold { display:inline-flex;align-items:center;gap:3px;background:linear-gradient(135deg,#78350f,#d97706,#fbbf24,#d97706);background-size:200% 200%;border:1px solid #fbbf24;box-shadow:0 0 14px #fbbf2480;color:#1c1917;font-size:7px;font-weight:900;padding:2px 6px;border-radius:5px;animation:gradShift 3s ease infinite;letter-spacing:.05em; }
-        .badge-silver { display:inline-flex;align-items:center;gap:3px;background:linear-gradient(135deg,#374151,#9ca3af,#d1d5db,#9ca3af);background-size:200% 200%;border:1px solid #d1d5db;box-shadow:0 0 10px #9ca3af40;color:#1f2937;font-size:7px;font-weight:900;padding:2px 6px;border-radius:5px;animation:gradShift 3s ease infinite;letter-spacing:.05em; }
-        .badge-bronze { display:inline-flex;align-items:center;gap:3px;background:linear-gradient(135deg,#431407,#c2410c,#ea580c);border:1px solid #fb923c;box-shadow:0 0 10px #c2410c50;color:#ffedd5;font-size:7px;font-weight:900;padding:2px 6px;border-radius:5px;letter-spacing:.05em; }
-        .badge-ach { display:inline-flex;align-items:center;gap:3px;font-size:7px;font-weight:900;padding:2px 6px;border-radius:5px;letter-spacing:.04em; }
-        .badge-ach-1 { background:linear-gradient(135deg,#064e3b,#065f46);border:1px solid #10b981;color:#a7f3d0;box-shadow:0 0 8px #10b98140; }
-        .badge-ach-2 { background:linear-gradient(135deg,#1e3a5f,#1e40af);border:1px solid #3b82f6;color:#bfdbfe;box-shadow:0 0 10px #3b82f640; }
-        .badge-ach-3 { background:linear-gradient(135deg,#4a1d96,#6d28d9);border:1px solid #8b5cf6;color:#ede9fe;box-shadow:0 0 12px #8b5cf660; }
-        .badge-ach-4 { background:linear-gradient(135deg,#7c2d12,#b45309,#d97706);background-size:200%;border:1px solid #f59e0b;color:#fef3c7;box-shadow:0 0 14px #f59e0b60;animation:gradShift 2s ease infinite; }
-        .badge-ach-5 { background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460,#533483);background-size:300% 300%;border:1px solid rgba(139,92,246,.6);color:#fff;box-shadow:0 0 20px #7c3aed80;animation:gradShift 2s ease infinite,legendGlow 2s ease-in-out infinite alternate; }
-        @keyframes legendGlow { from{box-shadow:0 0 12px #7c3aed80} to{box-shadow:0 0 28px #7c3aedcc,0 0 50px #4f46e540} }
+        .badge-ce2f{display:inline-flex;align-items:center;gap:3px;background:linear-gradient(135deg,#1e293b,#0f172a);border:1px solid rgba(148,163,184,.3);color:#94a3b8;font-size:7px;font-weight:800;padding:2px 6px;border-radius:5px;letter-spacing:.05em;}
+        .badge-webdev{display:inline-flex;align-items:center;gap:3px;background:linear-gradient(135deg,#581c87,#7e22ce,#581c87);background-size:200% 200%;border:1px solid #a855f7;box-shadow:0 0 12px #a855f780;color:#e9d5ff;font-size:7px;font-weight:900;padding:2px 6px;border-radius:5px;animation:gradShift 2s ease infinite,webdevGlow 1.5s ease-in-out infinite alternate;letter-spacing:.05em;}
+        @keyframes gradShift{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+        @keyframes webdevGlow{from{box-shadow:0 0 8px #a855f780}to{box-shadow:0 0 20px #a855f7cc,0 0 40px #7e22ce44}}
+        .badge-lecturer{display:inline-flex;align-items:center;gap:3px;background:linear-gradient(135deg,#7f1d1d,#dc2626);border:1px solid #f87171;box-shadow:0 0 14px #dc262660;color:#fecaca;font-size:7px;font-weight:900;padding:2px 6px;border-radius:5px;letter-spacing:.05em;}
+        .badge-gold{display:inline-flex;align-items:center;gap:3px;background:linear-gradient(135deg,#78350f,#d97706,#fbbf24,#d97706);background-size:200% 200%;border:1px solid #fbbf24;box-shadow:0 0 14px #fbbf2480;color:#1c1917;font-size:7px;font-weight:900;padding:2px 6px;border-radius:5px;animation:gradShift 3s ease infinite;letter-spacing:.05em;}
+        .badge-silver{display:inline-flex;align-items:center;gap:3px;background:linear-gradient(135deg,#374151,#9ca3af,#d1d5db,#9ca3af);background-size:200% 200%;border:1px solid #d1d5db;box-shadow:0 0 10px #9ca3af40;color:#1f2937;font-size:7px;font-weight:900;padding:2px 6px;border-radius:5px;animation:gradShift 3s ease infinite;letter-spacing:.05em;}
+        .badge-bronze{display:inline-flex;align-items:center;gap:3px;background:linear-gradient(135deg,#431407,#c2410c,#ea580c);border:1px solid #fb923c;box-shadow:0 0 10px #c2410c50;color:#ffedd5;font-size:7px;font-weight:900;padding:2px 6px;border-radius:5px;letter-spacing:.05em;}
+        .badge-ach{display:inline-flex;align-items:center;gap:3px;font-size:7px;font-weight:900;padding:2px 6px;border-radius:5px;letter-spacing:.04em;}
+        .badge-ach-1{background:linear-gradient(135deg,#064e3b,#065f46);border:1px solid #10b981;color:#a7f3d0;box-shadow:0 0 8px #10b98140;}
+        .badge-ach-2{background:linear-gradient(135deg,#1e3a5f,#1e40af);border:1px solid #3b82f6;color:#bfdbfe;box-shadow:0 0 10px #3b82f640;}
+        .badge-ach-3{background:linear-gradient(135deg,#4a1d96,#6d28d9);border:1px solid #8b5cf6;color:#ede9fe;box-shadow:0 0 12px #8b5cf660;}
+        .badge-ach-4{background:linear-gradient(135deg,#7c2d12,#b45309,#d97706);background-size:200%;border:1px solid #f59e0b;color:#fef3c7;box-shadow:0 0 14px #f59e0b60;animation:gradShift 2s ease infinite;}
+        .badge-ach-5{background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460,#533483);background-size:300% 300%;border:1px solid rgba(139,92,246,.6);color:#fff;box-shadow:0 0 20px #7c3aed80;animation:gradShift 2s ease infinite,legendGlow 2s ease-in-out infinite alternate;}
+        @keyframes legendGlow{from{box-shadow:0 0 12px #7c3aed80}to{box-shadow:0 0 28px #7c3aedcc,0 0 50px #4f46e540}}
 
         /* STATUS DOTS */
-        .dot-online  { width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 6px #22c55e;display:inline-block;animation:pulseDot 2s ease-in-out infinite;flex-shrink:0; }
-        .dot-offline { width:8px;height:8px;border-radius:50%;background:#6b7280;display:inline-block;flex-shrink:0; }
-        @keyframes pulseDot { 0%,100%{box-shadow:0 0 4px #22c55e} 50%{box-shadow:0 0 12px #22c55e} }
+        .dot-online{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 6px #22c55e;display:inline-block;animation:pulseDot 2s ease-in-out infinite;flex-shrink:0;}
+        .dot-offline{width:8px;height:8px;border-radius:50%;background:#6b7280;display:inline-block;flex-shrink:0;}
+        @keyframes pulseDot{0%,100%{box-shadow:0 0 4px #22c55e}50%{box-shadow:0 0 12px #22c55e}}
 
         /* SIDEBAR */
-        #sidebar { position:fixed;top:0;left:0;height:100%;z-index:200;width:272px;background:rgba(15,23,42,.97);backdrop-filter:blur(20px);border-right:1px solid rgba(255,255,255,.06);transform:translateX(-100%);transition:transform .3s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;padding:20px 14px;overflow-y:auto; }
-        #sidebar.open { transform:translateX(0); }
-        @media(min-width:768px){
-            #sidebar { position:relative;transform:none !important;background:rgba(30,41,59,1); }
-            #sidebar-overlay { display:none !important; }
-            #mobile-topbar { display:none !important; }
-            #main-layout { padding-top:0 !important; }
-        }
-        #sidebar-overlay { display:none;position:fixed;inset:0;z-index:199;background:rgba(0,0,0,.6);backdrop-filter:blur(4px); }
-        #sidebar-overlay.open { display:block; }
+        #sidebar{position:fixed;top:0;left:0;height:100%;z-index:200;width:272px;background:rgba(15,23,42,.97);backdrop-filter:blur(20px);border-right:1px solid rgba(255,255,255,.06);transform:translateX(-100%);transition:transform .3s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;padding:20px 14px;overflow-y:auto;}
+        #sidebar.open{transform:translateX(0);}
+        @media(min-width:768px){#sidebar{position:relative;transform:none !important;background:rgba(30,41,59,1);}#sidebar-overlay{display:none !important;}#mobile-topbar{display:none !important;}#main-layout{padding-top:0 !important;}}
+        #sidebar-overlay{display:none;position:fixed;inset:0;z-index:199;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);}
+        #sidebar-overlay.open{display:block;}
 
         /* MOBILE TOP BAR */
-        #mobile-topbar { position:fixed;top:0;left:0;right:0;z-index:100;height:56px;background:rgba(15,23,42,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;padding:0 16px;gap:12px; }
-        #hamburger-btn { width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s;flex-shrink:0; }
-        #hamburger-btn:active { background:rgba(255,255,255,.12); }
-        .hamburger-line { width:18px;height:2px;background:#93c5fd;border-radius:2px;transition:all .25s; }
+        #mobile-topbar{position:fixed;top:0;left:0;right:0;z-index:100;height:56px;background:rgba(15,23,42,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;padding:0 16px;gap:12px;}
+        #hamburger-btn{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
+        .hamburger-line{width:18px;height:2px;background:#93c5fd;border-radius:2px;}
 
         /* LAYOUT */
-        #main-layout { display:flex;height:100dvh;overflow:hidden; }
-        @media(max-width:767px){ #main-layout { padding-top:56px; } }
-        #main-content { flex:1;overflow-y:auto;padding:20px 14px;-webkit-overflow-scrolling:touch; }
-        @media(min-width:768px){ #main-content { padding:36px 40px; } }
+        #main-layout{display:flex;height:100dvh;overflow:hidden;}
+        @media(max-width:767px){#main-layout{padding-top:56px;}}
+        #main-content{flex:1;overflow-y:auto;padding:20px 14px;-webkit-overflow-scrolling:touch;}
+        @media(min-width:768px){#main-content{padding:36px 40px;}}
 
         /* TERMINAL */
-        #terminal { position:fixed;bottom:14px;right:14px;z-index:50;width:240px;height:96px;background:rgba(0,0,0,.62);border:1px solid rgba(255,255,255,.06);padding:10px;border-radius:14px;font-family:'Courier New',monospace;font-size:8px;color:#93c5fd;overflow-y:auto;backdrop-filter:blur(12px);transition:opacity .3s,transform .3s; }
-        #terminal.hidden-term { opacity:0;pointer-events:none;transform:translateY(8px); }
-        #terminal-toggle { position:fixed;bottom:118px;right:14px;z-index:51;cursor:pointer; }
-        @media(min-width:768px){ #terminal { width:280px;height:108px;bottom:20px;right:20px; } #terminal-toggle { bottom:136px;right:20px; } }
+        #terminal{position:fixed;bottom:14px;right:14px;z-index:50;width:240px;height:96px;background:rgba(0,0,0,.62);border:1px solid rgba(255,255,255,.06);padding:10px;border-radius:14px;font-family:'Courier New',monospace;font-size:8px;color:#93c5fd;overflow-y:auto;backdrop-filter:blur(12px);transition:opacity .3s,transform .3s;}
+        #terminal.hidden-term{opacity:0;pointer-events:none;transform:translateY(8px);}
+        #terminal-toggle{position:fixed;bottom:118px;right:14px;z-index:51;cursor:pointer;}
+        @media(min-width:768px){#terminal{width:280px;height:108px;bottom:20px;right:20px;}#terminal-toggle{bottom:136px;right:20px;}}
 
         /* CARDS */
-        .ach-card { transition:transform .2s,box-shadow .2s; }
-        .ach-card:hover { transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,.4); }
-        .ach-locked { opacity:.45;filter:grayscale(.6); }
-        .stat-card { transition:transform .15s,box-shadow .15s; }
-        .stat-card:active { transform:scale(.98); }
+        .ach-card{transition:transform .2s,box-shadow .2s;}.ach-card:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,.4);}
+        .ach-locked{opacity:.45;filter:grayscale(.6);}
+        .stat-card{transition:transform .15s,box-shadow .15s;}.stat-card:active{transform:scale(.98);}
+        .mode-btn{transition:all .2s;}.mode-btn:active{transform:scale(.97);}
 
         /* TICKER */
-        @keyframes tickerSlide { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
-        .ticker-track { animation:tickerSlide 20s linear infinite;display:flex;width:max-content; }
-        .ticker-wrap { overflow:hidden;width:100%; }
+        @keyframes tickerSlide{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+        .ticker-track{animation:tickerSlide 20s linear infinite;display:flex;width:max-content;}
+        .ticker-wrap{overflow:hidden;width:100%;}
 
-        /* LEADERBOARD horizontal scroll on mobile */
-        .lb-scroll { overflow-x:auto;-webkit-overflow-scrolling:touch; }
-        .lb-scroll table { min-width:540px; }
+        /* LEADERBOARD scroll */
+        .lb-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+        .lb-scroll table{min-width:540px;}
+
+        /* TIMER pulse when low */
+        .timer-danger{animation:timerPulse .5s ease-in-out infinite alternate;}
+        @keyframes timerPulse{from{opacity:1}to{opacity:.4}}
     </style>
 </head>
 <body class="font-sans">
 
-<!-- ═══ LOGIN ═══ -->
+<!-- LOGIN -->
 <div id="login-screen" class="flex flex-col items-center justify-center bg-[#0a0f1e] p-4 py-8 overflow-y-auto">
     <div class="orb w-72 h-72 bg-blue-600" style="top:-80px;left:-60px;animation-duration:6s"></div>
     <div class="orb w-56 h-56 bg-purple-700" style="bottom:-60px;right:-40px;animation-duration:8s;animation-delay:2s"></div>
@@ -107,14 +104,11 @@
         <p class="text-gray-500 text-[9px] mb-5 uppercase tracking-[.25em]">Computer Engineering · LingoReal Pro</p>
         <input type="text" id="username-input" placeholder="Nama Mahasiswa..."
             class="w-full p-4 bg-[#0a0f1e]/80 border-2 border-gray-700 rounded-2xl mb-3 text-white focus:border-blue-500 outline-none text-center font-bold placeholder-gray-600 transition-all text-sm">
-        <button id="login-btn" class="w-full bg-blue-600 hover:bg-blue-500 py-4 rounded-2xl font-black active:translate-y-0.5 transition-all text-sm" style="box-shadow:0 4px 0 #1d4ed8,0 0 20px #3b82f640">
-            SIGN IN ⚡
-        </button>
+        <button id="login-btn" class="w-full bg-blue-600 hover:bg-blue-500 py-4 rounded-2xl font-black active:translate-y-0.5 transition-all text-sm" style="box-shadow:0 4px 0 #1d4ed8,0 0 20px #3b82f640">SIGN IN ⚡</button>
         <p id="login-error" class="text-red-400 text-xs mt-3 hidden">⚠️ User tidak ditemukan!</p>
         <p class="text-gray-600 text-[9px] mt-4 tracking-widest">AUTHORIZED PERSONNEL ONLY</p>
     </div>
 
-    <!-- Live stats -->
     <div class="login-card w-full max-w-sm space-y-3">
         <div class="bg-[#0f172a]/70 backdrop-blur-md border border-white/5 rounded-2xl p-4 grid grid-cols-3 gap-2 text-center">
             <div><p id="login-stat-members" class="text-xl font-black text-blue-400">24</p><p class="text-[8px] text-gray-500 uppercase font-bold">Members</p></div>
@@ -132,29 +126,18 @@
     </div>
 </div>
 
-<!-- ═══ DASHBOARD ═══ -->
+<!-- DASHBOARD -->
 <div id="main-dashboard" class="hidden">
-
-    <!-- Mobile topbar -->
     <div id="mobile-topbar">
         <button id="hamburger-btn" onclick="toggleSidebar()">
-            <div class="flex flex-col gap-1.5">
-                <div class="hamburger-line"></div><div class="hamburger-line"></div><div class="hamburger-line"></div>
-            </div>
+            <div class="flex flex-col gap-1.5"><div class="hamburger-line"></div><div class="hamburger-line"></div><div class="hamburger-line"></div></div>
         </button>
-        <div class="flex-1 min-w-0">
-            <p class="font-black text-blue-400 text-sm italic truncate">LINGOREAL PRO</p>
-        </div>
-        <div class="flex items-center gap-1.5">
-            <span class="dot-online"></span>
-            <span class="text-[9px] text-green-400 font-bold truncate max-w-[80px]" id="mobile-username-label">---</span>
-        </div>
+        <div class="flex-1 min-w-0"><p class="font-black text-blue-400 text-sm italic truncate">LINGOREAL PRO</p></div>
+        <div class="flex items-center gap-1.5"><span class="dot-online"></span><span class="text-[9px] text-green-400 font-bold truncate max-w-[80px]" id="mobile-username-label">---</span></div>
     </div>
-
     <div id="sidebar-overlay" onclick="toggleSidebar()"></div>
 
     <div id="main-layout">
-
         <!-- SIDEBAR -->
         <aside id="sidebar">
             <button onclick="toggleSidebar()" class="md:hidden self-end mb-4 w-8 h-8 rounded-xl bg-white/5 flex items-center justify-center text-gray-400 text-lg">✕</button>
@@ -170,7 +153,6 @@
                 <button onclick="switchMenu('leaderboard')" data-menu="leaderboard" class="menu-btn w-full text-left p-3.5 rounded-2xl hover:bg-white/5 font-bold transition-all flex items-center gap-3 text-gray-400"><span>🏆</span><span data-i18n="nav_leaderboard">Leaderboard</span></button>
                 <button onclick="switchMenu('settings')" data-menu="settings" class="menu-btn w-full text-left p-3.5 rounded-2xl hover:bg-white/5 font-bold transition-all flex items-center gap-3 text-gray-400"><span>⚙️</span><span data-i18n="nav_settings">Settings</span></button>
             </nav>
-            <!-- Sync status -->
             <div class="mt-4 px-1 flex items-center gap-2">
                 <span class="text-[8px] text-gray-600">🔥 Firebase</span>
                 <span id="sync-status" class="text-[8px] text-blue-400 font-bold animate-pulse">Connecting...</span>
@@ -186,10 +168,7 @@
                 <div class="flex justify-between items-start mb-5">
                     <div>
                         <h1 class="text-2xl font-black text-blue-400 italic" data-i18n="profile_title">ENGINEER PROFILE</h1>
-                        <div class="flex items-center gap-2 mt-1.5">
-                            <span class="dot-online" id="my-status-dot"></span>
-                            <span id="my-status-text" class="text-xs text-green-400 font-bold">ONLINE</span>
-                        </div>
+                        <div class="flex items-center gap-2 mt-1.5"><span class="dot-online" id="my-status-dot"></span><span id="my-status-text" class="text-xs text-green-400 font-bold">ONLINE</span></div>
                     </div>
                     <div id="user-badge-main" class="flex gap-1.5 items-center flex-wrap max-w-[160px] justify-end"></div>
                 </div>
@@ -219,35 +198,76 @@
                 <div id="inspect-content"></div>
             </section>
 
-            <!-- QUIZ -->
+            <!-- QUIZ MODE — new flow -->
             <section id="menu-quiz" class="menu-content hidden animate__animated animate__fadeIn">
-                <div id="quiz-ready" class="space-y-5 max-w-2xl mx-auto">
-                    <div class="text-center py-6 bg-[#1e293b] rounded-3xl border border-blue-500/20 shadow-2xl">
-                        <div class="text-4xl mb-2">🎯</div>
-                        <h2 class="text-xl font-black mb-1 italic text-white uppercase" data-i18n="quiz_select_title">Select Your Mission</h2>
-                        <p class="text-gray-400 text-xs" data-i18n="quiz_select_sub">Pilih difficulty & mode!</p>
-                    </div>
-                    <div>
-                        <p class="text-gray-500 text-[9px] uppercase font-black mb-2 tracking-widest" data-i18n="quiz_step1">① Pilih Difficulty</p>
-                        <p id="diff-hint" class="text-red-400 text-xs font-bold mb-2 hidden animate__animated animate__shakeX" data-i18n="quiz_diff_hint">⚠️ Pilih difficulty dulu!</p>
-                        <div class="grid grid-cols-3 gap-3">
-                            <button id="diff-beginner" onclick="selectDifficulty('beginner')" class="diff-btn bg-[#1e293b] border-2 border-green-500/30 p-4 rounded-2xl text-center hover:bg-green-500/10 transition-all active:scale-95"><div class="text-2xl mb-1.5">🌱</div><p class="font-black text-green-400 text-xs" data-i18n="diff_beginner">BEGINNER</p><p class="text-gray-500 text-[9px] mt-0.5" data-i18n="diff_beginner_count">5 Soal</p></button>
-                            <button id="diff-intermediate" onclick="selectDifficulty('intermediate')" class="diff-btn bg-[#1e293b] border-2 border-yellow-500/30 p-4 rounded-2xl text-center hover:bg-yellow-500/10 transition-all active:scale-95"><div class="text-2xl mb-1.5">⚡</div><p class="font-black text-yellow-400 text-xs" data-i18n="diff_intermediate">INTERMEDIATE</p><p class="text-gray-500 text-[9px] mt-0.5" data-i18n="diff_intermediate_count">10 Soal</p></button>
-                            <button id="diff-advanced" onclick="selectDifficulty('advanced')" class="diff-btn bg-[#1e293b] border-2 border-red-500/30 p-4 rounded-2xl text-center hover:bg-red-500/10 transition-all active:scale-95"><div class="text-2xl mb-1.5">🔥</div><p class="font-black text-red-400 text-xs" data-i18n="diff_advanced">ADVANCED</p><p class="text-gray-500 text-[9px] mt-0.5" data-i18n="diff_advanced_count">15 Soal</p></button>
+                <div id="quiz-ready">
+                    <!-- STEP 1: Mode select -->
+                    <div id="quiz-mode-select" class="max-w-2xl mx-auto space-y-5">
+                        <div class="text-center py-5 bg-[#1e293b] rounded-3xl border border-blue-500/20 shadow-2xl">
+                            <div class="text-4xl mb-2">🎯</div>
+                            <h2 class="text-xl font-black mb-1 italic text-white uppercase" data-i18n="quiz_select_title">PICK QUIZ MODE</h2>
+                            <p class="text-gray-400 text-xs" data-i18n="quiz_select_sub">Pilih mode dulu, lalu tentukan difficulty!</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 text-[9px] uppercase font-black mb-3 tracking-widest" data-i18n="quiz_step_mode">① Pilih Mode Quiz</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                <button onclick="selectQuizMode('mode1')" data-mode="mode1"
+                                    class="mode-btn group bg-[#1e293b] border-2 border-white/5 p-6 rounded-3xl text-center hover:border-blue-500 hover:bg-blue-500/10 transition-all shadow-xl active:scale-95">
+                                    <div class="text-3xl mb-3 group-hover:scale-110 transition-transform">🔤</div>
+                                    <h3 class="font-black text-base mb-1 text-white italic" data-i18n="mode_arrange">ARRANGE</h3>
+                                    <p class="text-[9px] text-gray-500 uppercase font-bold" data-i18n="mode_arrange_sub">Susun Kata</p>
+                                </button>
+                                <button onclick="selectQuizMode('mode2')" data-mode="mode2"
+                                    class="mode-btn group bg-[#1e293b] border-2 border-white/5 p-6 rounded-3xl text-center hover:border-purple-500 hover:bg-purple-500/10 transition-all shadow-xl active:scale-95">
+                                    <div class="text-3xl mb-3 group-hover:scale-110 transition-transform">⏳</div>
+                                    <h3 class="font-black text-base mb-1 text-white italic" data-i18n="mode_tenses">TENSES</h3>
+                                    <p class="text-[9px] text-gray-500 uppercase font-bold" data-i18n="mode_tenses_sub">Grammar</p>
+                                </button>
+                                <button onclick="selectQuizMode('mode3')" data-mode="mode3"
+                                    class="mode-btn group bg-[#1e293b] border-2 border-white/5 p-6 rounded-3xl text-center hover:border-green-500 hover:bg-green-500/10 transition-all shadow-xl active:scale-95">
+                                    <div class="text-3xl mb-3 group-hover:scale-110 transition-transform">⚖️</div>
+                                    <h3 class="font-black text-base mb-1 text-white italic" data-i18n="mode_tf">TRUE/FALSE</h3>
+                                    <p class="text-[9px] text-gray-500 uppercase font-bold" data-i18n="mode_tf_sub">Knowledge</p>
+                                </button>
+                            </div>
                         </div>
                     </div>
-                    <div>
-                        <p class="text-gray-500 text-[9px] uppercase font-black mb-2 tracking-widest" data-i18n="quiz_step2">② Pilih Mode Quiz</p>
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                            <button onclick="startActualQuiz('mode1')" class="group bg-[#1e293b] border-2 border-white/5 p-6 rounded-3xl text-center hover:border-blue-500 hover:bg-blue-500/10 transition-all shadow-xl active:scale-95"><div class="text-3xl mb-3 group-hover:scale-110 transition-transform">🔤</div><h3 class="font-black text-base mb-1 text-white italic" data-i18n="mode_arrange">ARRANGE</h3><p class="text-[9px] text-gray-500 uppercase font-bold" data-i18n="mode_arrange_sub">Susun Kata</p></button>
-                            <button onclick="startActualQuiz('mode2')" class="group bg-[#1e293b] border-2 border-white/5 p-6 rounded-3xl text-center hover:border-purple-500 hover:bg-purple-500/10 transition-all shadow-xl active:scale-95"><div class="text-3xl mb-3 group-hover:scale-110 transition-transform">⏳</div><h3 class="font-black text-base mb-1 text-white italic" data-i18n="mode_tenses">TENSES</h3><p class="text-[9px] text-gray-500 uppercase font-bold" data-i18n="mode_tenses_sub">Grammar</p></button>
-                            <button onclick="startActualQuiz('mode3')" class="group bg-[#1e293b] border-2 border-white/5 p-6 rounded-3xl text-center hover:border-green-500 hover:bg-green-500/10 transition-all shadow-xl active:scale-95"><div class="text-3xl mb-3 group-hover:scale-110 transition-transform">⚖️</div><h3 class="font-black text-base mb-1 text-white italic" data-i18n="mode_tf">TRUE/FALSE</h3><p class="text-[9px] text-gray-500 uppercase font-bold" data-i18n="mode_tf_sub">Knowledge</p></button>
+
+                    <!-- STEP 2: Difficulty (slides in after mode selected) -->
+                    <div id="quiz-diff-select" class="hidden max-w-2xl mx-auto mt-5">
+                        <div class="bg-[#1e293b] rounded-3xl border border-white/5 p-5 shadow-xl">
+                            <p class="text-gray-400 text-[9px] uppercase font-black mb-3 tracking-widest" data-i18n="quiz_step_diff">② Pilih Tingkat Kesulitan</p>
+                            <p id="diff-hint" class="text-red-400 text-xs font-bold mb-3 hidden animate__animated animate__shakeX" data-i18n="quiz_diff_hint">⚠️ Pilih difficulty dulu!</p>
+                            <div class="grid grid-cols-3 gap-3 mb-4">
+                                <button id="diff-beginner" onclick="selectDifficulty('beginner')"
+                                    class="diff-btn bg-[#0f172a] border-2 border-green-500/30 p-4 rounded-2xl text-center hover:bg-green-500/10 transition-all active:scale-95">
+                                    <div class="text-2xl mb-1.5">🌱</div>
+                                    <p class="font-black text-green-400 text-xs" data-i18n="diff_beginner">BEGINNER</p>
+                                    <p class="text-gray-500 text-[8px] mt-0.5" data-i18n="diff_beginner_count">5 Soal · 30s</p>
+                                </button>
+                                <button id="diff-intermediate" onclick="selectDifficulty('intermediate')"
+                                    class="diff-btn bg-[#0f172a] border-2 border-yellow-500/30 p-4 rounded-2xl text-center hover:bg-yellow-500/10 transition-all active:scale-95">
+                                    <div class="text-2xl mb-1.5">⚡</div>
+                                    <p class="font-black text-yellow-400 text-xs" data-i18n="diff_intermediate">INTERMEDIATE</p>
+                                    <p class="text-gray-500 text-[8px] mt-0.5" data-i18n="diff_intermediate_count">10 Soal · 20s</p>
+                                </button>
+                                <button id="diff-advanced" onclick="selectDifficulty('advanced')"
+                                    class="diff-btn bg-[#0f172a] border-2 border-red-500/30 p-4 rounded-2xl text-center hover:bg-red-500/10 transition-all active:scale-95">
+                                    <div class="text-2xl mb-1.5">🔥</div>
+                                    <p class="font-black text-red-400 text-xs" data-i18n="diff_advanced">ADVANCED</p>
+                                    <p class="text-gray-500 text-[8px] mt-0.5" data-i18n="diff_advanced_count">15 Soal · 15s</p>
+                                </button>
+                            </div>
+                            <button onclick="startActualQuiz()" class="w-full bg-blue-600 hover:bg-blue-500 py-4 rounded-2xl font-black text-white text-sm active:translate-y-0.5 transition-all shadow-[0_4px_0_0_#1d4ed8]" data-i18n="start_quiz">MULAI QUIZ</button>
                         </div>
                     </div>
                 </div>
+
+                <!-- GAME ENGINE -->
                 <div id="game-engine" class="hidden max-w-xl mx-auto pt-4">
                     <div class="flex justify-between items-center mb-3 px-1">
                         <h2 id="q-number" class="text-[9px] font-black text-blue-500 uppercase tracking-widest">Task 1/5</h2>
+                        <span id="quiz-timer" class="text-blue-400 font-black text-sm">⏱ 30s</span>
                         <button onclick="goBackToModeSelect()" class="text-[9px] font-black text-red-400 uppercase italic" data-i18n="abort">Abort ✖</button>
                     </div>
                     <div class="w-full bg-gray-800 h-2 rounded-full mb-5 overflow-hidden"><div id="progress-bar" class="bg-blue-500 h-full transition-all duration-700 w-0"></div></div>
@@ -255,7 +275,10 @@
                         <p id="soal-teks" class="text-center text-base font-black mb-5 italic text-gray-800 leading-relaxed">"Memuat..."</p>
                         <div id="answer-zone" class="min-h-[52px] border-b-2 border-dashed border-gray-100 flex flex-wrap gap-2 justify-center p-2 mb-5"></div>
                         <div id="options-zone" class="flex flex-wrap gap-2 justify-center mb-5"></div>
-                        <div id="ai-feedback" class="hidden bg-slate-900 p-4 rounded-2xl text-left mb-4 border-l-4 border-red-500 animate__animated animate__shakeX"><p class="text-red-400 text-[8px] font-black mb-1 uppercase tracking-widest" data-i18n="alert_label">Alert</p><p id="ai-text" class="text-white text-xs font-bold italic"></p></div>
+                        <div id="ai-feedback" class="hidden bg-slate-900 p-4 rounded-2xl text-left mb-4 border-l-4 border-red-500 animate__animated animate__shakeX">
+                            <p class="text-red-400 text-[8px] font-black mb-1 uppercase tracking-widest" data-i18n="alert_label">Alert</p>
+                            <p id="ai-text" class="text-white text-xs font-bold italic"></p>
+                        </div>
                         <button id="check-btn" class="w-full bg-blue-600 text-white font-black py-4 rounded-2xl shadow-[0_4px_0_0_#1d4ed8] active:translate-y-0.5 transition-all text-sm" data-i18n="execute_btn">EXECUTE ⚡</button>
                     </div>
                 </div>
@@ -279,8 +302,7 @@
                     <table class="w-full text-left">
                         <thead class="bg-[#0f172a] text-gray-500 text-[8px] uppercase font-black">
                             <tr>
-                                <th class="p-4">#</th>
-                                <th class="p-4" data-i18n="lb_name">Name</th>
+                                <th class="p-4">#</th><th class="p-4" data-i18n="lb_name">Name</th>
                                 <th class="p-4 text-center">Status</th>
                                 <th class="p-4 text-center" data-i18n="lb_played">Played</th>
                                 <th class="p-4 text-center" data-i18n="lb_score">Score</th>
@@ -305,9 +327,9 @@
                 </div>
             </section>
 
-        </div><!-- /main-content -->
-    </div><!-- /main-layout -->
-</div><!-- /dashboard -->
+        </div>
+    </div>
+</div>
 
 <!-- TERMINAL -->
 <div id="terminal-toggle" onclick="toggleTerminal()">
@@ -315,36 +337,38 @@
 </div>
 <div id="terminal" class="hidden-term"><p>> System initialized...</p></div>
 
-<!-- Unused modal (kept for safety) -->
+<!-- CHALLENGE MODAL -->
+<div id="challenge-modal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-sm z-[300] flex items-center justify-center p-6">
+    <div class="bg-[#1e293b] border-2 border-orange-500/50 p-8 rounded-3xl max-w-sm w-full text-center shadow-2xl animate__animated animate__zoomIn">
+        <div class="text-5xl mb-3">⚔️</div>
+        <h2 class="text-xl font-black text-orange-400 mb-1" data-i18n="challenge_title">TANTANGAN MASUK!</h2>
+        <p class="text-white font-bold text-lg mb-1"><span id="challenge-from-name" class="text-orange-300">---</span></p>
+        <p class="text-gray-400 text-sm mb-6" data-i18n="challenge_from">menantang kamu!</p>
+        <div class="grid grid-cols-2 gap-3">
+            <button onclick="acceptChallenge()" class="bg-orange-500 hover:bg-orange-400 text-white font-black py-3 rounded-2xl text-sm active:scale-95 transition-all" data-i18n="challenge_accept">Terima</button>
+            <button onclick="declineChallenge()" class="bg-white/5 hover:bg-white/10 text-gray-400 font-bold py-3 rounded-2xl text-sm active:scale-95 transition-all" data-i18n="challenge_decline">Tolak</button>
+        </div>
+    </div>
+</div>
+
+<!-- Fallback modal -->
 <div id="user-modal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-sm z-[300] flex items-center justify-center p-6">
     <div class="bg-[#1e293b] border border-white/10 p-8 rounded-3xl max-w-sm w-full text-center shadow-2xl relative">
         <button onclick="closeModal()" class="absolute top-5 right-5 text-gray-500 hover:text-white">✕</button>
         <h2 id="modal-name" class="text-xl font-black mb-1">---</h2>
         <p id="modal-rank" class="text-blue-400 text-[9px] font-black uppercase mb-4">---</p>
         <div id="modal-badges" class="flex flex-wrap gap-1.5 justify-center mb-4"></div>
-        <div class="space-y-3 text-left bg-[#0f172a] p-5 rounded-2xl border border-white/5 mb-4 text-sm">
-            <div class="flex justify-between border-b border-white/5 pb-2"><span class="text-gray-500 text-xs">Played:</span><span id="modal-played" class="font-bold">0</span></div>
-            <div class="flex justify-between border-b border-white/5 pb-2"><span class="text-gray-500 text-xs">Correct:</span><span id="modal-score" class="font-bold text-green-400">0</span></div>
-            <div class="flex justify-between"><span class="text-gray-500 text-xs">Errors:</span><span id="modal-errors" class="font-bold text-red-400">0</span></div>
-        </div>
-        <div id="modal-ach-preview" class="flex flex-wrap gap-1.5 justify-center mb-5"></div>
         <button onclick="closeModal()" class="w-full bg-white/5 py-3 rounded-2xl font-bold text-sm">Back</button>
     </div>
 </div>
 
-<!-- ⚡ CRITICAL: type="module" for Firebase ES imports -->
 <script type="module" src="script.js"></script>
-
-<!-- Sidebar toggle (must be non-module so it's global) -->
 <script>
 function toggleSidebar(){
-    const sb=document.getElementById('sidebar');
-    const ov=document.getElementById('sidebar-overlay');
+    const sb=document.getElementById('sidebar'),ov=document.getElementById('sidebar-overlay');
     const open=sb.classList.contains('open');
-    sb.classList.toggle('open',!open);
-    ov.classList.toggle('open',!open);
+    sb.classList.toggle('open',!open); ov.classList.toggle('open',!open);
 }
-// Close sidebar on menu click (mobile)
 document.addEventListener('DOMContentLoaded',()=>{
     document.querySelectorAll('.menu-btn').forEach(btn=>{
         btn.addEventListener('click',()=>{ if(window.innerWidth<768) toggleSidebar(); });
