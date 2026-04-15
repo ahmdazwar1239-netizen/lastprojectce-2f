@@ -3,24 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>LingoReal - CE-2F</title>
+    <title>LingoReal - CE-2F English Practice</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
         *{box-sizing:border-box;}
-        body{background-color:#0f172a;min-height:100vh;color:white;-webkit-tap-highlight-color:transparent;}
+        body{background-color:#0f172a;min-height:100vh;color:white;-webkit-tap-highlight-color:transparent;font-family:'Segoe UI',sans-serif;}
         ::-webkit-scrollbar{width:4px;}
         ::-webkit-scrollbar-thumb{background:#1e293b;border-radius:10px;}
 
-        /* LOGIN BG */
-        #login-screen{position:relative;overflow:hidden;min-height:100dvh;}
-        .code-rain{position:absolute;inset:0;pointer-events:none;z-index:0;}
-        .login-card{position:relative;z-index:1;}
-        .float-symbol{position:absolute;font-family:'Courier New',monospace;color:rgba(59,130,246,.18);font-size:.85rem;font-weight:bold;animation:floatUp linear infinite;user-select:none;}
-        @keyframes floatUp{0%{transform:translateY(110vh) rotate(0deg);opacity:0}10%{opacity:1}90%{opacity:.7}100%{transform:translateY(-10vh) rotate(20deg);opacity:0}}
-        .orb{position:absolute;border-radius:50%;filter:blur(80px);animation:orbPulse ease-in-out infinite alternate;}
-        @keyframes orbPulse{from{opacity:.25;transform:scale(1)}to{opacity:.5;transform:scale(1.15)}}
-        .grid-overlay{position:absolute;inset:0;background-image:linear-gradient(rgba(59,130,246,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,.04) 1px,transparent 1px);background-size:48px 48px;}
+        /* LANDING */
+        .landing-bg{background:radial-gradient(ellipse at 20% 20%,rgba(59,130,246,.15) 0%,transparent 50%),radial-gradient(ellipse at 80% 80%,rgba(139,92,246,.1) 0%,transparent 50%),#0f172a;}
+        .grid-overlay{position:absolute;inset:0;background-image:linear-gradient(rgba(59,130,246,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,.03) 1px,transparent 1px);background-size:48px 48px;pointer-events:none;}
+        .float-symbol{position:absolute;font-family:'Courier New',monospace;color:rgba(59,130,246,.12);font-size:.8rem;font-weight:bold;animation:floatUp linear infinite;user-select:none;pointer-events:none;}
+        @keyframes floatUp{0%{transform:translateY(110vh) rotate(0deg);opacity:0}10%{opacity:1}90%{opacity:.6}100%{transform:translateY(-10vh) rotate(20deg);opacity:0}}
+
+        /* NAVBAR */
+        #landing-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(15,23,42,.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.06);height:60px;display:flex;align-items:center;padding:0 24px;}
 
         /* BADGES */
         .badge-ce2f{display:inline-flex;align-items:center;gap:3px;background:linear-gradient(135deg,#1e293b,#0f172a);border:1px solid rgba(148,163,184,.3);color:#94a3b8;font-size:7px;font-weight:800;padding:2px 6px;border-radius:5px;letter-spacing:.05em;}
@@ -39,7 +38,7 @@
         .badge-ach-5{background:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460,#533483);background-size:300% 300%;border:1px solid rgba(139,92,246,.6);color:#fff;box-shadow:0 0 20px #7c3aed80;animation:gradShift 2s ease infinite,legendGlow 2s ease-in-out infinite alternate;}
         @keyframes legendGlow{from{box-shadow:0 0 12px #7c3aed80}to{box-shadow:0 0 28px #7c3aedcc,0 0 50px #4f46e540}}
 
-        /* STATUS DOTS */
+        /* STATUS */
         .dot-online{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 6px #22c55e;display:inline-block;animation:pulseDot 2s ease-in-out infinite;flex-shrink:0;}
         .dot-offline{width:8px;height:8px;border-radius:50%;background:#6b7280;display:inline-block;flex-shrink:0;}
         @keyframes pulseDot{0%,100%{box-shadow:0 0 4px #22c55e}50%{box-shadow:0 0 12px #22c55e}}
@@ -50,8 +49,6 @@
         @media(min-width:768px){#sidebar{position:relative;transform:none !important;background:rgba(30,41,59,1);}#sidebar-overlay{display:none !important;}#mobile-topbar{display:none !important;}#main-layout{padding-top:0 !important;}}
         #sidebar-overlay{display:none;position:fixed;inset:0;z-index:199;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);}
         #sidebar-overlay.open{display:block;}
-
-        /* MOBILE TOP BAR */
         #mobile-topbar{position:fixed;top:0;left:0;right:0;z-index:100;height:56px;background:rgba(15,23,42,.88);backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.05);display:flex;align-items:center;padding:0 16px;gap:12px;}
         #hamburger-btn{width:40px;height:40px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;cursor:pointer;flex-shrink:0;}
         .hamburger-line{width:18px;height:2px;background:#93c5fd;border-radius:2px;}
@@ -72,61 +69,254 @@
         .ach-card{transition:transform .2s,box-shadow .2s;}.ach-card:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,.4);}
         .ach-locked{opacity:.45;filter:grayscale(.6);}
         .stat-card{transition:transform .15s,box-shadow .15s;}.stat-card:active{transform:scale(.98);}
-        .mode-btn{transition:all .2s;}.mode-btn:active{transform:scale(.97);}
+        .mode-card{transition:all .2s;}.mode-card:hover{transform:translateY(-3px);}
 
         /* TICKER */
         @keyframes tickerSlide{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-        .ticker-track{animation:tickerSlide 20s linear infinite;display:flex;width:max-content;}
+        .ticker-track{animation:tickerSlide 25s linear infinite;display:flex;width:max-content;}
         .ticker-wrap{overflow:hidden;width:100%;}
-
-        /* LEADERBOARD scroll */
         .lb-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
         .lb-scroll table{min-width:540px;}
 
-        /* TIMER pulse when low */
-        .timer-danger{animation:timerPulse .5s ease-in-out infinite alternate;}
-        @keyframes timerPulse{from{opacity:1}to{opacity:.4}}
+        /* CONVERSATION */
+        .chat-bubble-left{background:#1e293b;border-radius:0 16px 16px 16px;padding:10px 14px;max-width:80%;}
+        .chat-bubble-right{background:#2563eb;border-radius:16px 0 16px 16px;padding:10px 14px;max-width:80%;}
+        .chat-option{background:#1e293b;border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:8px 14px;cursor:pointer;transition:all .2s;text-align:left;}
+        .chat-option:hover{background:#2563eb;border-color:#3b82f6;}
+        .chat-option.correct-opt{background:#065f46;border-color:#10b981;}
+        .chat-option.wrong-opt{background:#7f1d1d;border-color:#ef4444;}
+
+        /* LANDING FEATURE CARDS */
+        .feature-card{background:rgba(30,41,59,.6);border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:20px;backdrop-filter:blur(10px);transition:all .2s;}
+        .feature-card:hover{border-color:rgba(59,130,246,.4);transform:translateY(-2px);}
     </style>
 </head>
 <body class="font-sans">
 
-<!-- LOGIN -->
-<div id="login-screen" class="flex flex-col items-center justify-center bg-[#0a0f1e] p-4 py-8 overflow-y-auto">
-    <div class="orb w-72 h-72 bg-blue-600" style="top:-80px;left:-60px;animation-duration:6s"></div>
-    <div class="orb w-56 h-56 bg-purple-700" style="bottom:-60px;right:-40px;animation-duration:8s;animation-delay:2s"></div>
-    <div class="orb w-36 h-36 bg-cyan-500" style="top:40%;right:20%;animation-duration:5s;animation-delay:1s"></div>
+<!-- ═══════════════ LANDING PAGE ═══════════════ -->
+<div id="landing-page" class="landing-bg min-h-screen relative overflow-hidden">
     <div class="grid-overlay"></div>
-    <div class="code-rain" id="code-rain"></div>
+    <div id="landing-code-rain"></div>
 
-    <div class="login-card bg-[#0f172a]/80 backdrop-blur-xl border border-blue-500/30 p-6 rounded-3xl w-full max-w-sm shadow-2xl text-center mb-4" style="box-shadow:0 0 60px rgba(59,130,246,.15),inset 0 1px 0 rgba(255,255,255,.06)">
-        <div class="w-14 h-14 mx-auto mb-3 rounded-2xl bg-blue-600/20 border border-blue-500/40 flex items-center justify-center text-2xl" style="box-shadow:0 0 20px #3b82f640">💻</div>
-        <h1 class="text-xl font-black mb-1 text-blue-400 italic tracking-wide">CE-2F ACCESS</h1>
-        <p class="text-gray-500 text-[9px] mb-5 uppercase tracking-[.25em]">Computer Engineering · LingoReal Pro</p>
-        <input type="text" id="username-input" placeholder="Nama Mahasiswa..."
-            class="w-full p-4 bg-[#0a0f1e]/80 border-2 border-gray-700 rounded-2xl mb-3 text-white focus:border-blue-500 outline-none text-center font-bold placeholder-gray-600 transition-all text-sm">
-        <button id="login-btn" class="w-full bg-blue-600 hover:bg-blue-500 py-4 rounded-2xl font-black active:translate-y-0.5 transition-all text-sm" style="box-shadow:0 4px 0 #1d4ed8,0 0 20px #3b82f640">SIGN IN ⚡</button>
-        <p id="login-error" class="text-red-400 text-xs mt-3 hidden">⚠️ User tidak ditemukan!</p>
-        <p class="text-gray-600 text-[9px] mt-4 tracking-widest">AUTHORIZED PERSONNEL ONLY</p>
+    <!-- NAVBAR -->
+    <nav id="landing-nav" class="flex items-center justify-between">
+        <!-- Logo -->
+        <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg bg-blue-600/30 border border-blue-500/50 flex items-center justify-center text-sm">💻</div>
+            <span class="font-black text-blue-400 italic text-lg">LingoReal</span>
+            <span class="hidden sm:block text-[8px] text-gray-600 uppercase tracking-widest bg-[#1e293b] px-2 py-1 rounded-md">CE-2F</span>
+        </div>
+
+        <!-- Nav links (desktop) -->
+        <div class="hidden md:flex items-center gap-6 text-sm">
+            <a href="#features" class="text-gray-400 hover:text-white transition-colors" data-i18n-land="nav_features">Fitur</a>
+            <a href="#modes" class="text-gray-400 hover:text-white transition-colors" data-i18n-land="nav_modes">Mode Quiz</a>
+            <a href="#leaderboard-preview" class="text-gray-400 hover:text-white transition-colors" data-i18n-land="nav_lb">Leaderboard</a>
+            <a href="#about" class="text-gray-400 hover:text-white transition-colors" data-i18n-land="nav_about">Tentang</a>
+        </div>
+
+        <!-- Sign in + lang -->
+        <div class="flex items-center gap-3">
+            <!-- Lang toggle -->
+            <button onclick="toggleLandingLang()" id="land-lang-btn" class="text-[10px] font-black text-gray-400 hover:text-white bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg transition-all">🇮🇩 ID</button>
+            <!-- Sign In button -->
+            <button onclick="openLoginModal()" class="bg-blue-600 hover:bg-blue-500 text-white font-black px-5 py-2 rounded-xl text-sm transition-all active:scale-95" style="box-shadow:0 0 20px #3b82f640" data-i18n-land="sign_in">Sign In</button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="pt-32 pb-20 px-6 text-center max-w-4xl mx-auto">
+        <div class="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/30 rounded-full px-4 py-1.5 text-xs text-blue-400 font-bold mb-6">
+            <span class="dot-online w-1.5 h-1.5"></span>
+            <span data-i18n-land="hero_badge">Platform belajar Bahasa Inggris kelas CE-2F</span>
+        </div>
+        <h1 class="text-4xl sm:text-6xl font-black mb-4 leading-tight">
+            <span class="text-white" data-i18n-land="hero_title_1">Belajar Bahasa Inggris</span><br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400" data-i18n-land="hero_title_2">sambil Bersaing 🔥</span>
+        </h1>
+        <p class="text-gray-400 text-base sm:text-lg max-w-xl mx-auto mb-8 leading-relaxed" data-i18n-land="hero_sub">
+            Bukan buku teks. Bukan hafalan membosankan. Ini quiz interaktif bareng temen sekelas yang bikin lo ngerti English dengan cara yang asik.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+            <button onclick="openLoginModal()" class="bg-blue-600 hover:bg-blue-500 text-white font-black px-8 py-4 rounded-2xl text-base transition-all active:scale-95" style="box-shadow:0 4px 0 #1d4ed8,0 0 30px #3b82f640" data-i18n-land="cta_start">
+                Mulai Sekarang ⚡
+            </button>
+            <a href="#modes" class="bg-white/5 hover:bg-white/10 border border-white/10 text-white font-bold px-8 py-4 rounded-2xl text-base transition-all" data-i18n-land="cta_explore">
+                Lihat Mode Quiz →
+            </a>
+        </div>
+
+        <!-- Stats preview -->
+        <div class="grid grid-cols-3 gap-4 max-w-sm mx-auto mt-12">
+            <div class="bg-white/5 rounded-2xl p-4 border border-white/5">
+                <p class="text-2xl font-black text-blue-400">23</p>
+                <p class="text-[9px] text-gray-500 uppercase font-bold" data-i18n-land="stat_students">Mahasiswa</p>
+            </div>
+            <div class="bg-white/5 rounded-2xl p-4 border border-white/5">
+                <p id="land-total-played" class="text-2xl font-black text-purple-400">0</p>
+                <p class="text-[9px] text-gray-500 uppercase font-bold" data-i18n-land="stat_played">Quiz Dimainkan</p>
+            </div>
+            <div class="bg-white/5 rounded-2xl p-4 border border-white/5">
+                <p id="land-online-count" class="text-2xl font-black text-green-400">0</p>
+                <p class="text-[9px] text-gray-500 uppercase font-bold" data-i18n-land="stat_online">Online</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="px-6 py-16 max-w-5xl mx-auto">
+        <p class="text-center text-[10px] text-gray-500 uppercase font-black tracking-widest mb-3" data-i18n-land="section_why">Kenapa LingoReal?</p>
+        <h2 class="text-2xl sm:text-3xl font-black text-center mb-10" data-i18n-land="features_title">Belajar yang ga bikin ngantuk</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="feature-card">
+                <div class="text-3xl mb-3">🎲</div>
+                <h3 class="font-black text-white mb-1 text-sm" data-i18n-land="feat1_title">Soal Digenerate Otomatis</h3>
+                <p class="text-gray-400 text-xs leading-relaxed" data-i18n-land="feat1_desc">Ribuan kombinasi soal dari word bank yang kaya. Ga bakal ketemu soal yang sama dua kali!</p>
+            </div>
+            <div class="feature-card">
+                <div class="text-3xl mb-3">🏆</div>
+                <h3 class="font-black text-white mb-1 text-sm" data-i18n-land="feat2_title">Live Leaderboard</h3>
+                <p class="text-gray-400 text-xs leading-relaxed" data-i18n-land="feat2_desc">Skor semua orang update real-time. Siapa yang lagi belajar paling rajin? Cek sekarang.</p>
+            </div>
+            <div class="feature-card">
+                <div class="text-3xl mb-3">🎖️</div>
+                <h3 class="font-black text-white mb-1 text-sm" data-i18n-land="feat3_title">Achievement System</h3>
+                <p class="text-gray-400 text-xs leading-relaxed" data-i18n-land="feat3_desc">Kumpulin badge dari level 1 sampai 5. Makin rajin, makin keren badge-nya.</p>
+            </div>
+            <div class="feature-card">
+                <div class="text-3xl mb-3">⚔️</div>
+                <h3 class="font-black text-white mb-1 text-sm" data-i18n-land="feat4_title">Challenge Teman</h3>
+                <p class="text-gray-400 text-xs leading-relaxed" data-i18n-land="feat4_desc">Tantang temen sekelas langsung dari leaderboard. Siapa yang lebih jago?</p>
+            </div>
+            <div class="feature-card">
+                <div class="text-3xl mb-3">💬</div>
+                <h3 class="font-black text-white mb-1 text-sm" data-i18n-land="feat5_title">Conversation Practice</h3>
+                <p class="text-gray-400 text-xs leading-relaxed" data-i18n-land="feat5_desc">Mode dialog interaktif — latih percakapan sehari-hari dalam situasi nyata.</p>
+            </div>
+            <div class="feature-card">
+                <div class="text-3xl mb-3">🌐</div>
+                <h3 class="font-black text-white mb-1 text-sm" data-i18n-land="feat6_title">Main di Mana Aja</h3>
+                <p class="text-gray-400 text-xs leading-relaxed" data-i18n-land="feat6_desc">HP, tablet, laptop — semua bisa. Data tersinkron via Firebase, ga perlu satu device.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODES -->
+    <section id="modes" class="px-6 py-16 max-w-5xl mx-auto">
+        <p class="text-center text-[10px] text-gray-500 uppercase font-black tracking-widest mb-3" data-i18n-land="section_modes">Mode Latihan</p>
+        <h2 class="text-2xl sm:text-3xl font-black text-center mb-10" data-i18n-land="modes_title">4 Cara Latihan Bahasa Inggris</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <div class="feature-card border-blue-500/20 cursor-pointer hover:border-blue-500/60" onclick="openLoginModal()">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="text-3xl">🔤</div>
+                    <div>
+                        <h3 class="font-black text-white" data-i18n-land="mode1_name">Arrange Words</h3>
+                        <p class="text-blue-400 text-[9px] uppercase font-bold" data-i18n-land="mode1_tag">Susun Kalimat</p>
+                    </div>
+                </div>
+                <p class="text-gray-400 text-xs leading-relaxed" data-i18n-land="mode1_desc">Susun kata-kata acak jadi kalimat yang bener. Contoh: <span class="text-blue-300 font-mono">"Khairul + studies + English + carefully + every day"</span></p>
+            </div>
+            <div class="feature-card border-purple-500/20 cursor-pointer hover:border-purple-500/60" onclick="openLoginModal()">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="text-3xl">⏳</div>
+                    <div>
+                        <h3 class="font-black text-white" data-i18n-land="mode2_name">Tenses Challenge</h3>
+                        <p class="text-purple-400 text-[9px] uppercase font-bold" data-i18n-land="mode2_tag">Tata Bahasa</p>
+                    </div>
+                </div>
+                <p class="text-gray-400 text-xs leading-relaxed" data-i18n-land="mode2_desc">Pilih tenses yang tepat. Contoh: <span class="text-purple-300 font-mono">"Alya ___ homework yesterday. → did"</span></p>
+            </div>
+            <div class="feature-card border-green-500/20 cursor-pointer hover:border-green-500/60" onclick="openLoginModal()">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="text-3xl">⚖️</div>
+                    <div>
+                        <h3 class="font-black text-white" data-i18n-land="mode3_name">True or False</h3>
+                        <p class="text-green-400 text-[9px] uppercase font-bold" data-i18n-land="mode3_tag">Pengetahuan Umum</p>
+                    </div>
+                </div>
+                <p class="text-gray-400 text-xs leading-relaxed" data-i18n-land="mode3_desc">Uji pengetahuan umum + grammar. Contoh: <span class="text-green-300 font-mono">"CSS is a programming language → False"</span></p>
+            </div>
+            <div class="feature-card border-orange-500/20 cursor-pointer hover:border-orange-500/60" onclick="openLoginModal()">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="text-3xl">💬</div>
+                    <div>
+                        <h3 class="font-black text-white" data-i18n-land="mode4_name">Conversation</h3>
+                        <p class="text-orange-400 text-[9px] uppercase font-bold" data-i18n-land="mode4_tag">Dialog Interaktif</p>
+                    </div>
+                </div>
+                <p class="text-gray-400 text-xs leading-relaxed" data-i18n-land="mode4_desc">Latih percakapan dalam situasi nyata. Contoh: <span class="text-orange-300 font-mono">Ordering food, Asking directions, Job interview...</span></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- LEADERBOARD PREVIEW -->
+    <section id="leaderboard-preview" class="px-6 py-16 max-w-3xl mx-auto">
+        <p class="text-center text-[10px] text-gray-500 uppercase font-black tracking-widest mb-3" data-i18n-land="section_lb">Peringkat</p>
+        <h2 class="text-2xl sm:text-3xl font-black text-center mb-8" data-i18n-land="lb_preview_title">Siapa yang Paling Rajin?</h2>
+        <div class="bg-[#1e293b] rounded-2xl border border-white/5 overflow-hidden">
+            <div id="landing-lb-preview" class="divide-y divide-white/5">
+                <div class="p-4 text-center text-gray-500 text-sm">Loading leaderboard...</div>
+            </div>
+        </div>
+        <p class="text-center text-xs text-gray-600 mt-4" data-i18n-land="lb_preview_sub">Login untuk lihat leaderboard lengkap & detail profil teman</p>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="px-6 py-16 max-w-3xl mx-auto text-center">
+        <div class="bg-[#1e293b] rounded-3xl border border-white/5 p-8">
+            <div class="text-4xl mb-4">👨‍💻</div>
+            <h2 class="text-xl font-black mb-2" data-i18n-land="about_title">Tentang LingoReal</h2>
+            <p class="text-gray-400 text-sm leading-relaxed mb-4" data-i18n-land="about_desc">
+                LingoReal dibuat khusus buat kelas Computer Engineering CE-2F sebagai platform latihan Bahasa Inggris yang interaktif. Dibuat oleh Azwar (Web Dev CE-2F) dengan ❤️
+            </p>
+            <div class="flex flex-wrap gap-2 justify-center">
+                <span class="badge-ce2f text-[9px] px-3 py-1">🎓 CE-2F</span>
+                <span class="badge-webdev text-[9px] px-3 py-1">⚡ WEB DEV</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- TICKER -->
+    <div class="border-t border-white/5 py-3 overflow-hidden">
+        <div class="ticker-wrap">
+            <div class="ticker-track text-[10px] text-blue-400/40 font-bold gap-12" id="landing-ticker">
+                <span class="px-8">🚀 LingoReal Pro — CE-2F English Practice</span>
+                <span class="px-8">💡 Belajar bahasa Inggris sambil bersaing!</span>
+                <span class="px-8">🏆 Cek leaderboard & buktikan skill lo!</span>
+                <span class="px-8">⚡ Arrange · Tenses · True/False · Conversation</span>
+                <span class="px-8">🎲 Soal digenerate otomatis — unlimited!</span>
+                <span class="px-8">🚀 LingoReal Pro — CE-2F English Practice</span>
+                <span class="px-8">💡 Belajar bahasa Inggris sambil bersaing!</span>
+                <span class="px-8">🏆 Cek leaderboard & buktikan skill lo!</span>
+                <span class="px-8">⚡ Arrange · Tenses · True/False · Conversation</span>
+                <span class="px-8">🎲 Soal digenerate otomatis — unlimited!</span>
+            </div>
+        </div>
     </div>
 
-    <div class="login-card w-full max-w-sm space-y-3">
-        <div class="bg-[#0f172a]/70 backdrop-blur-md border border-white/5 rounded-2xl p-4 grid grid-cols-3 gap-2 text-center">
-            <div><p id="login-stat-members" class="text-xl font-black text-blue-400">24</p><p class="text-[8px] text-gray-500 uppercase font-bold">Members</p></div>
-            <div><p id="login-stat-online" class="text-xl font-black text-green-400">0</p><p class="text-[8px] text-gray-500 uppercase font-bold">Online</p></div>
-            <div><p id="login-stat-quizzes" class="text-xl font-black text-purple-400">0</p><p class="text-[8px] text-gray-500 uppercase font-bold">Played</p></div>
-        </div>
-        <div class="bg-[#0f172a]/70 backdrop-blur-md border border-blue-500/10 rounded-2xl px-4 py-3 overflow-hidden">
-            <div class="ticker-wrap"><div class="ticker-track text-[9px] text-blue-400/60 font-bold gap-10" id="login-ticker"></div></div>
-        </div>
-        <div id="login-top-player" class="bg-[#0f172a]/70 backdrop-blur-md border border-yellow-500/10 rounded-2xl p-3 flex items-center gap-3 hidden">
-            <span class="text-xl">👑</span>
-            <div><p class="text-[8px] text-gray-500 uppercase font-bold">Top Engineer</p><p id="login-top-name" class="text-sm font-black text-yellow-400">---</p></div>
-            <div class="ml-auto text-right"><p id="login-top-score" class="text-base font-black">0</p><p class="text-[8px] text-gray-500">correct</p></div>
-        </div>
+    <!-- Footer -->
+    <div class="text-center py-6 text-[9px] text-gray-700">
+        LingoReal Pro · CE-2F Computer Engineering · Built with ❤️ by Azwar
     </div>
 </div>
 
-<!-- DASHBOARD -->
+<!-- ═══════════════ LOGIN MODAL ═══════════════ -->
+<div id="login-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-md z-[300] flex items-center justify-center p-6">
+    <div class="bg-[#1e293b] border border-blue-500/30 p-8 rounded-3xl w-full max-w-sm shadow-2xl text-center animate__animated animate__zoomIn" style="box-shadow:0 0 60px rgba(59,130,246,.15)">
+        <button onclick="closeLoginModal()" class="absolute top-5 right-5 text-gray-500 hover:text-white text-xl">✕</button>
+        <div class="w-14 h-14 mx-auto mb-3 rounded-2xl bg-blue-600/20 border border-blue-500/40 flex items-center justify-center text-2xl">💻</div>
+        <h1 class="text-xl font-black mb-1 text-blue-400 italic">CE-2F ACCESS</h1>
+        <p class="text-gray-500 text-[9px] mb-5 uppercase tracking-[.25em]" data-i18n-land="login_sub">Masukkan nama kamu</p>
+        <input type="text" id="username-input" placeholder="Nama Mahasiswa..."
+            class="w-full p-4 bg-[#0f172a] border-2 border-gray-700 rounded-2xl mb-3 text-white focus:border-blue-500 outline-none text-center font-bold placeholder-gray-600 transition-all text-sm">
+        <button id="login-btn" class="w-full bg-blue-600 hover:bg-blue-500 py-4 rounded-2xl font-black active:translate-y-0.5 transition-all text-sm" style="box-shadow:0 4px 0 #1d4ed8">
+            SIGN IN ⚡
+        </button>
+        <p id="login-error" class="text-red-400 text-xs mt-3 hidden">⚠️ User tidak ditemukan di database CE-2F!</p>
+    </div>
+</div>
+
+<!-- ═══════════════ DASHBOARD ═══════════════ -->
 <div id="main-dashboard" class="hidden">
     <div id="mobile-topbar">
         <button id="hamburger-btn" onclick="toggleSidebar()">
@@ -138,7 +328,6 @@
     <div id="sidebar-overlay" onclick="toggleSidebar()"></div>
 
     <div id="main-layout">
-        <!-- SIDEBAR -->
         <aside id="sidebar">
             <button onclick="toggleSidebar()" class="md:hidden self-end mb-4 w-8 h-8 rounded-xl bg-white/5 flex items-center justify-center text-gray-400 text-lg">✕</button>
             <div class="mb-6 text-center">
@@ -160,7 +349,6 @@
             <button onclick="doLogout()" class="mt-3 p-3.5 bg-red-500/10 text-red-500 rounded-2xl font-bold hover:bg-red-500 hover:text-white transition-all text-sm"><span data-i18n="logout">Logout</span> 🚪</button>
         </aside>
 
-        <!-- MAIN CONTENT -->
         <div id="main-content">
 
             <!-- USER PROFILE -->
@@ -192,68 +380,66 @@
             <!-- INSPECT USER -->
             <section id="menu-inspect" class="menu-content hidden animate__animated animate__fadeIn">
                 <div class="flex items-center gap-3 mb-5">
-                    <button onclick="backFromInspect()" class="bg-[#1e293b] hover:bg-white/10 border border-white/10 px-4 py-2.5 rounded-xl font-black text-gray-300 transition-all text-sm">←</button>
+                    <button onclick="backFromInspect()" class="bg-[#1e293b] hover:bg-white/10 border border-white/10 px-4 py-2.5 rounded-xl font-black text-gray-300 text-sm">←</button>
                     <div><h1 class="text-xl font-black text-blue-400 italic" data-i18n="inspect_title">ENGINEER PROFILE</h1><p class="text-gray-500 text-[9px] mt-0.5" data-i18n="inspect_sub">Viewing another engineer</p></div>
                 </div>
                 <div id="inspect-content"></div>
             </section>
 
-            <!-- QUIZ MODE — new flow -->
+            <!-- QUIZ -->
             <section id="menu-quiz" class="menu-content hidden animate__animated animate__fadeIn">
                 <div id="quiz-ready">
-                    <!-- STEP 1: Mode select -->
                     <div id="quiz-mode-select" class="max-w-2xl mx-auto space-y-5">
                         <div class="text-center py-5 bg-[#1e293b] rounded-3xl border border-blue-500/20 shadow-2xl">
                             <div class="text-4xl mb-2">🎯</div>
                             <h2 class="text-xl font-black mb-1 italic text-white uppercase" data-i18n="quiz_select_title">PICK QUIZ MODE</h2>
-                            <p class="text-gray-400 text-xs" data-i18n="quiz_select_sub">Pilih mode dulu, lalu tentukan difficulty!</p>
+                            <p class="text-gray-400 text-xs" data-i18n="quiz_select_sub">Pilih mode dulu, baru tentukan difficulty!</p>
                         </div>
                         <div>
                             <p class="text-gray-500 text-[9px] uppercase font-black mb-3 tracking-widest" data-i18n="quiz_step_mode">① Pilih Mode Quiz</p>
-                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                                <button onclick="selectQuizMode('mode1')" data-mode="mode1"
-                                    class="mode-btn group bg-[#1e293b] border-2 border-white/5 p-6 rounded-3xl text-center hover:border-blue-500 hover:bg-blue-500/10 transition-all shadow-xl active:scale-95">
-                                    <div class="text-3xl mb-3 group-hover:scale-110 transition-transform">🔤</div>
-                                    <h3 class="font-black text-base mb-1 text-white italic" data-i18n="mode_arrange">ARRANGE</h3>
-                                    <p class="text-[9px] text-gray-500 uppercase font-bold" data-i18n="mode_arrange_sub">Susun Kata</p>
+                            <div class="grid grid-cols-2 gap-3">
+                                <button onclick="selectQuizMode('mode1')" data-mode="mode1" class="mode-btn mode-card group bg-[#1e293b] border-2 border-white/5 p-5 rounded-3xl text-center hover:border-blue-500 hover:bg-blue-500/10 transition-all active:scale-95">
+                                    <div class="text-3xl mb-2">🔤</div>
+                                    <h3 class="font-black text-sm mb-0.5 text-white" data-i18n="mode_arrange">ARRANGE</h3>
+                                    <p class="text-[8px] text-gray-500 uppercase font-bold" data-i18n="mode_arrange_sub">Susun Kata</p>
                                 </button>
-                                <button onclick="selectQuizMode('mode2')" data-mode="mode2"
-                                    class="mode-btn group bg-[#1e293b] border-2 border-white/5 p-6 rounded-3xl text-center hover:border-purple-500 hover:bg-purple-500/10 transition-all shadow-xl active:scale-95">
-                                    <div class="text-3xl mb-3 group-hover:scale-110 transition-transform">⏳</div>
-                                    <h3 class="font-black text-base mb-1 text-white italic" data-i18n="mode_tenses">TENSES</h3>
-                                    <p class="text-[9px] text-gray-500 uppercase font-bold" data-i18n="mode_tenses_sub">Grammar</p>
+                                <button onclick="selectQuizMode('mode2')" data-mode="mode2" class="mode-btn mode-card group bg-[#1e293b] border-2 border-white/5 p-5 rounded-3xl text-center hover:border-purple-500 hover:bg-purple-500/10 transition-all active:scale-95">
+                                    <div class="text-3xl mb-2">⏳</div>
+                                    <h3 class="font-black text-sm mb-0.5 text-white" data-i18n="mode_tenses">TENSES</h3>
+                                    <p class="text-[8px] text-gray-500 uppercase font-bold" data-i18n="mode_tenses_sub">Grammar</p>
                                 </button>
-                                <button onclick="selectQuizMode('mode3')" data-mode="mode3"
-                                    class="mode-btn group bg-[#1e293b] border-2 border-white/5 p-6 rounded-3xl text-center hover:border-green-500 hover:bg-green-500/10 transition-all shadow-xl active:scale-95">
-                                    <div class="text-3xl mb-3 group-hover:scale-110 transition-transform">⚖️</div>
-                                    <h3 class="font-black text-base mb-1 text-white italic" data-i18n="mode_tf">TRUE/FALSE</h3>
-                                    <p class="text-[9px] text-gray-500 uppercase font-bold" data-i18n="mode_tf_sub">Knowledge</p>
+                                <button onclick="selectQuizMode('mode3')" data-mode="mode3" class="mode-btn mode-card group bg-[#1e293b] border-2 border-white/5 p-5 rounded-3xl text-center hover:border-green-500 hover:bg-green-500/10 transition-all active:scale-95">
+                                    <div class="text-3xl mb-2">⚖️</div>
+                                    <h3 class="font-black text-sm mb-0.5 text-white" data-i18n="mode_tf">TRUE/FALSE</h3>
+                                    <p class="text-[8px] text-gray-500 uppercase font-bold" data-i18n="mode_tf_sub">Knowledge</p>
+                                </button>
+                                <button onclick="selectQuizMode('mode4')" data-mode="mode4" class="mode-btn mode-card group bg-[#1e293b] border-2 border-orange-500/20 p-5 rounded-3xl text-center hover:border-orange-500 hover:bg-orange-500/10 transition-all active:scale-95">
+                                    <div class="text-3xl mb-2">💬</div>
+                                    <h3 class="font-black text-sm mb-0.5 text-white" data-i18n="mode_conv">CONVERSATION</h3>
+                                    <p class="text-[8px] text-orange-400 uppercase font-bold" data-i18n="mode_conv_sub">Dialog</p>
                                 </button>
                             </div>
                         </div>
                     </div>
 
-                    <!-- STEP 2: Difficulty (slides in after mode selected) -->
+                    <!-- DIFFICULTY (slides in) -->
                     <div id="quiz-diff-select" class="hidden max-w-2xl mx-auto mt-5">
                         <div class="bg-[#1e293b] rounded-3xl border border-white/5 p-5 shadow-xl">
-                            <p class="text-gray-400 text-[9px] uppercase font-black mb-3 tracking-widest" data-i18n="quiz_step_diff">② Pilih Tingkat Kesulitan</p>
-                            <p id="diff-hint" class="text-red-400 text-xs font-bold mb-3 hidden animate__animated animate__shakeX" data-i18n="quiz_diff_hint">⚠️ Pilih difficulty dulu!</p>
+                            <p class="text-gray-400 text-[9px] uppercase font-black mb-3 tracking-widest" data-i18n="quiz_step_diff">② Pilih Difficulty</p>
+                            <p id="diff-hint" class="text-red-400 text-xs font-bold mb-3 hidden animate__animated animate__shakeX">⚠️ Pilih difficulty dulu!</p>
                             <div class="grid grid-cols-3 gap-3 mb-4">
-                                <button id="diff-beginner" onclick="selectDifficulty('beginner')"
-                                    class="diff-btn bg-[#0f172a] border-2 border-green-500/30 p-4 rounded-2xl text-center hover:bg-green-500/10 transition-all active:scale-95">
-                                    <div class="text-2xl mb-1.5">🌱</div>
+                                <button id="diff-beginner" onclick="selectDifficulty('beginner')" class="diff-btn bg-[#0f172a] border-2 border-green-500/30 p-4 rounded-2xl text-center hover:bg-green-500/10 transition-all active:scale-95">
+                                    <div class="text-2xl mb-1">🌱</div>
                                     <p class="font-black text-green-400 text-xs" data-i18n="diff_beginner">BEGINNER</p>
                                     <p class="text-gray-500 text-[8px] mt-0.5" data-i18n="diff_beginner_count">5 Soal · 30s</p>
                                 </button>
-                                <button id="diff-intermediate" onclick="selectDifficulty('intermediate')"
-                                    class="diff-btn bg-[#0f172a] border-2 border-yellow-500/30 p-4 rounded-2xl text-center hover:bg-yellow-500/10 transition-all active:scale-95">
-                                    <div class="text-2xl mb-1.5">⚡</div>
+                                <button id="diff-intermediate" onclick="selectDifficulty('intermediate')" class="diff-btn bg-[#0f172a] border-2 border-yellow-500/30 p-4 rounded-2xl text-center hover:bg-yellow-500/10 transition-all active:scale-95">
+                                    <div class="text-2xl mb-1">⚡</div>
                                     <p class="font-black text-yellow-400 text-xs" data-i18n="diff_intermediate">INTERMEDIATE</p>
                                     <p class="text-gray-500 text-[8px] mt-0.5" data-i18n="diff_intermediate_count">10 Soal · 20s</p>
                                 </button>
-                                <button id="diff-advanced" onclick="selectDifficulty('advanced')"
-                                    class="diff-btn bg-[#0f172a] border-2 border-red-500/30 p-4 rounded-2xl text-center hover:bg-red-500/10 transition-all active:scale-95">
-                                    <div class="text-2xl mb-1.5">🔥</div>
+                                <button id="diff-advanced" onclick="selectDifficulty('advanced')" class="diff-btn bg-[#0f172a] border-2 border-red-500/30 p-4 rounded-2xl text-center hover:bg-red-500/10 transition-all active:scale-95">
+                                    <div class="text-2xl mb-1">🔥</div>
                                     <p class="font-black text-red-400 text-xs" data-i18n="diff_advanced">ADVANCED</p>
                                     <p class="text-gray-500 text-[8px] mt-0.5" data-i18n="diff_advanced_count">15 Soal · 15s</p>
                                 </button>
@@ -271,7 +457,9 @@
                         <button onclick="goBackToModeSelect()" class="text-[9px] font-black text-red-400 uppercase italic" data-i18n="abort">Abort ✖</button>
                     </div>
                     <div class="w-full bg-gray-800 h-2 rounded-full mb-5 overflow-hidden"><div id="progress-bar" class="bg-blue-500 h-full transition-all duration-700 w-0"></div></div>
-                    <div class="bg-white rounded-3xl p-5 shadow-2xl text-gray-900 border-t-[6px] border-blue-600">
+
+                    <!-- Regular quiz card -->
+                    <div id="quiz-card" class="bg-white rounded-3xl p-5 shadow-2xl text-gray-900 border-t-[6px] border-blue-600">
                         <p id="soal-teks" class="text-center text-base font-black mb-5 italic text-gray-800 leading-relaxed">"Memuat..."</p>
                         <div id="answer-zone" class="min-h-[52px] border-b-2 border-dashed border-gray-100 flex flex-wrap gap-2 justify-center p-2 mb-5"></div>
                         <div id="options-zone" class="flex flex-wrap gap-2 justify-center mb-5"></div>
@@ -280,6 +468,16 @@
                             <p id="ai-text" class="text-white text-xs font-bold italic"></p>
                         </div>
                         <button id="check-btn" class="w-full bg-blue-600 text-white font-black py-4 rounded-2xl shadow-[0_4px_0_0_#1d4ed8] active:translate-y-0.5 transition-all text-sm" data-i18n="execute_btn">EXECUTE ⚡</button>
+                    </div>
+
+                    <!-- Conversation card -->
+                    <div id="conv-card" class="hidden bg-[#1e293b] rounded-3xl p-5 shadow-2xl border border-white/5">
+                        <div class="mb-3">
+                            <p class="text-[9px] text-gray-500 uppercase font-black mb-1" id="conv-scenario-label">Scenario</p>
+                            <p id="conv-scenario" class="text-sm font-bold text-blue-300"></p>
+                        </div>
+                        <div id="conv-chat" class="space-y-3 mb-5 min-h-[120px] max-h-64 overflow-y-auto"></div>
+                        <div id="conv-options" class="space-y-2"></div>
                     </div>
                 </div>
             </section>
@@ -326,14 +524,13 @@
                     </div>
                 </div>
             </section>
-
         </div>
     </div>
 </div>
 
 <!-- TERMINAL -->
 <div id="terminal-toggle" onclick="toggleTerminal()">
-    <div class="bg-black/60 border border-white/10 rounded-full px-3 py-1 text-[8px] font-mono text-blue-400 backdrop-blur-sm hover:bg-blue-600/20 transition-all">▲ LOG</div>
+    <div class="bg-black/60 border border-white/10 rounded-full px-3 py-1 text-[8px] font-mono text-blue-400 backdrop-blur-sm">▲ LOG</div>
 </div>
 <div id="terminal" class="hidden-term"><p>> System initialized...</p></div>
 
@@ -342,16 +539,15 @@
     <div class="bg-[#1e293b] border-2 border-orange-500/50 p-8 rounded-3xl max-w-sm w-full text-center shadow-2xl animate__animated animate__zoomIn">
         <div class="text-5xl mb-3">⚔️</div>
         <h2 class="text-xl font-black text-orange-400 mb-1" data-i18n="challenge_title">TANTANGAN MASUK!</h2>
-        <p class="text-white font-bold text-lg mb-1"><span id="challenge-from-name" class="text-orange-300">---</span></p>
+        <p class="text-white font-bold text-lg mb-1"><span id="challenge-from-name">---</span></p>
         <p class="text-gray-400 text-sm mb-6" data-i18n="challenge_from">menantang kamu!</p>
         <div class="grid grid-cols-2 gap-3">
-            <button onclick="acceptChallenge()" class="bg-orange-500 hover:bg-orange-400 text-white font-black py-3 rounded-2xl text-sm active:scale-95 transition-all" data-i18n="challenge_accept">Terima</button>
-            <button onclick="declineChallenge()" class="bg-white/5 hover:bg-white/10 text-gray-400 font-bold py-3 rounded-2xl text-sm active:scale-95 transition-all" data-i18n="challenge_decline">Tolak</button>
+            <button onclick="acceptChallenge()" class="bg-orange-500 hover:bg-orange-400 text-white font-black py-3 rounded-2xl text-sm" data-i18n="challenge_accept">Terima</button>
+            <button onclick="declineChallenge()" class="bg-white/5 hover:bg-white/10 text-gray-400 font-bold py-3 rounded-2xl text-sm" data-i18n="challenge_decline">Tolak</button>
         </div>
     </div>
 </div>
 
-<!-- Fallback modal -->
 <div id="user-modal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-sm z-[300] flex items-center justify-center p-6">
     <div class="bg-[#1e293b] border border-white/10 p-8 rounded-3xl max-w-sm w-full text-center shadow-2xl relative">
         <button onclick="closeModal()" class="absolute top-5 right-5 text-gray-500 hover:text-white">✕</button>
@@ -364,14 +560,23 @@
 
 <script type="module" src="script.js"></script>
 <script>
+window.openLoginModal=()=>{
+    const m=document.getElementById('login-modal');
+    m.classList.remove('hidden');
+    setTimeout(()=>document.getElementById('username-input').focus(),100);
+};
+window.closeLoginModal=()=>document.getElementById('login-modal').classList.add('hidden');
+// Close on backdrop click
+document.getElementById('login-modal')?.addEventListener('click',e=>{if(e.target===e.currentTarget)closeLoginModal();});
+
 function toggleSidebar(){
     const sb=document.getElementById('sidebar'),ov=document.getElementById('sidebar-overlay');
     const open=sb.classList.contains('open');
-    sb.classList.toggle('open',!open); ov.classList.toggle('open',!open);
+    sb.classList.toggle('open',!open);ov.classList.toggle('open',!open);
 }
 document.addEventListener('DOMContentLoaded',()=>{
     document.querySelectorAll('.menu-btn').forEach(btn=>{
-        btn.addEventListener('click',()=>{ if(window.innerWidth<768) toggleSidebar(); });
+        btn.addEventListener('click',()=>{if(window.innerWidth<768)toggleSidebar();});
     });
 });
 </script>
